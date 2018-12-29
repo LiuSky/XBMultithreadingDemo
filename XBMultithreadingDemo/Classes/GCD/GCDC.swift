@@ -29,7 +29,7 @@ final class GCDC: UIViewController {
         self.navigationItem.title = "GCD演示"
         self.view.backgroundColor = UIColor.white
         
-        self.syncConcurrent()
+        //self.syncConcurrent()
         //self.asyncConcurrent()
         //self.syncSerial()
         //self.asyncSerial()
@@ -41,7 +41,7 @@ final class GCDC: UIViewController {
         //self.apply()
         //self.groupNotify()
         //self.groupWait()
-        //self.groupEnterAndLeave()
+        self.groupEnterAndLeave()
         //self.semaphoreSync()
         //self.initTicketStatusNotSave()
         //self.initTicketStatusSave()

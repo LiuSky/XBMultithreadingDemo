@@ -26,7 +26,8 @@ final class ViewController: UIViewController {
     }()
     
     /// 数据源
-    private lazy var data = ["GCD演示"]
+    private lazy var data = ["GCD演示",
+                             "OperationQueue演示"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,9 @@ extension ViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             let vc = GCDC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            let vc = OperationC()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
