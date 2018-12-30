@@ -4,7 +4,7 @@
 //
 //  Created by xiaobin liu on 2018/12/28.
 //  Copyright © 2018 Sky. All rights reserved.
-//
+//  
 
 import UIKit
 
@@ -27,7 +27,8 @@ final class ViewController: UIViewController {
     
     /// 数据源
     private lazy var data = ["GCD演示",
-                             "OperationQueue演示"]
+                             "OperationQueue演示",
+                             "Thread演示"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,9 @@ extension ViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         case 1:
             let vc = OperationC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let vc = ThreadC()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
