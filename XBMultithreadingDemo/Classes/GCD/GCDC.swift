@@ -41,10 +41,12 @@ final class GCDC: UIViewController {
         //self.apply()
         //self.groupNotify()
         //self.groupWait()
-        self.groupEnterAndLeave()
+        //self.groupEnterAndLeave()
         //self.semaphoreSync()
         //self.initTicketStatusNotSave()
         //self.initTicketStatusSave()
+        //self.mainThread()
+        self.mainQueue()
     }
 
     
@@ -636,5 +638,44 @@ final class GCDC: UIViewController {
             // 相当于解锁
             self.semaphoreLock.signal()
         }
+    }
+    
+    
+    /// 主线程只会执行主队列的任务吗？
+    private func mainThread() {
+        
+        let key = DispatchSpecificKey<Any>()
+        
+        DispatchQueue.main.setSpecific(key: key, value: "main")
+        
+        func log() {
+            debugPrint("main thread: \(Thread.isMainThread)")
+            let value = DispatchQueue.getSpecific(key: key)
+            debugPrint("main queue: \(value != nil)")
+        }
+        
+        DispatchQueue.global().sync(execute: log)
+        RunLoop.current.run()
+
+    }
+    
+    /// 主队列任务只会在主线程上执行吗?
+    private func mainQueue() {
+        ///但在iOS系统上可以说主队列任务只会在主线程上执行
+        //http://www.cocoachina.com/cms/wap.php?action=article&id=24726
+        let key = DispatchSpecificKey<Any>()
+        
+        DispatchQueue.main.setSpecific(key: key, value: "main")
+        
+        func log() {
+            debugPrint("main thread: \(Thread.isMainThread)")
+            let value = DispatchQueue.getSpecific(key: key)
+            debugPrint("main queue: \(value != nil)")
+        }
+        
+        DispatchQueue.global().async {
+            DispatchQueue.main.async(execute: log)
+        }
+        //dispatchMain()
     }
 }
